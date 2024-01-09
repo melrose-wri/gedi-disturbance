@@ -43,8 +43,8 @@ def gedi_product_path(product):
 GEDI_L1B_PATH = gedi_product_path(GediProduct.L1B)
 GEDI_L2A_PATH = gedi_product_path(GediProduct.L2A)
 GEDI_L4A_PATH = gedi_product_path(GediProduct.L4A)
-JRC_PATH = DATA_PATH / "JRC" / "v1_2022"
-RADD_PATH = DATA_PATH / "RADD"
+JRC_PATH = DATA_PATH
+RADD_PATH = DATA_PATH / "Loss"
 
 # ---------------- API KEYS -------------------------
 

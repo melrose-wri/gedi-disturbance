@@ -3,7 +3,7 @@ import numpy as np
 import unittest
 import xarray as xr
 
-from src.data import jrc_overlays
+from src.processing import jrc_overlays  #TODO: Note to Amelia - need to refactor jrc_overlays from data to processing
 
 
 class TestJrcOverlays(unittest.TestCase):
@@ -40,7 +40,7 @@ class TestJrcOverlays(unittest.TestCase):
                 "x": np.arange(disturb_data.shape[2]),
             },
         )
-        return d_2019, d_2020, d_2021, d_2022
+        return d_2019, d_2020, d_2021, d_2022 #TODO This returns four arguments
 
     def test_treat_1px(self):
         a = np.zeros((4, 6, 7))  # 4 years, 6 lon, 7 lat
@@ -56,7 +56,7 @@ class TestJrcOverlays(unittest.TestCase):
                 "longitude": [2.5, 1.1, 4.5],
             }
         )
-        treat, ctrl, date = jrc_overlays._overlay_disturbance(*rsts, df)
+        treat, ctrl, date, valid = jrc_overlays._overlay_disturbance(*rsts, df)
         self.assertTrue(np.all(treat == np.array([1.0, 0.0])))
         self.assertTrue(np.all(ctrl == np.array([0.0, 0.0])))
         date_correct = np.zeros((4, 2))
@@ -79,7 +79,7 @@ class TestJrcOverlays(unittest.TestCase):
                 "longitude": [2.5, 4.2, 3.1],
             }
         )
-        treat, ctrl, date = jrc_overlays._overlay_disturbance(*rsts, df)
+        treat, ctrl, date, valid = jrc_overlays._overlay_disturbance(*rsts, df)
         self.assertTrue(np.all(treat == np.array([1.0, 0.0, 2.0])))
         self.assertTrue(np.all(ctrl == np.array([0.0, 0.0, 0.0])))
         date_correct = np.zeros((4, 3))
@@ -102,7 +102,7 @@ class TestJrcOverlays(unittest.TestCase):
                 "longitude": [2.5, 2.1, 4.5],
             }
         )
-        treat, ctrl, date = jrc_overlays._overlay_disturbance(*rsts, df)
+        treat, ctrl, date, valid = jrc_overlays._overlay_disturbance(*rsts, df)
         self.assertTrue(np.all(treat == np.array([0.0, 0.0])))
         self.assertTrue(np.all(ctrl == np.array([1.0, 0.0])))
         date_correct = np.zeros((4, 2))
@@ -127,7 +127,7 @@ class TestJrcOverlays(unittest.TestCase):
                 "longitude": [2.5, 4.2, 3.1],
             }
         )
-        treat, ctrl, date = jrc_overlays._overlay_disturbance(*rsts, df)
+        treat, ctrl, date, valid = jrc_overlays._overlay_disturbance(*rsts, df)
         self.assertTrue(np.all(treat == np.array([0.0, 0.0, 0.0])))
         self.assertTrue(np.all(ctrl == np.array([1.0, 0.0, 2.0])))
         date_correct = np.zeros((4, 3))

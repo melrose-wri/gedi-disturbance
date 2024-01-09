@@ -81,8 +81,7 @@ def _overlay_disturbance(
             measured[cs] += 1
             disturb_date[p_idx, cs] = first_disturb_year[cs]
             p_idx += 1
-    return measured, control, disturb_date, valid
-
+    return measured, control, disturb_date, valid  #TODO: Tests were wrong (needed 3 instead of 4 arguments). Make sure this is updated in the rest of the code.
 
 def _overlay_disturbance_no_deforestation(
     rst_2019: xr.DataArray,

@@ -36,13 +36,29 @@ class TestCase(unittest.TestCase):
         v[2, 2, 2] = 32
 
         rsts = self._make_intensity_data(d, v)
+        # df = pd.DataFrame(
+        #     {
+        #         "t1_year": [2019, 2019, 2019],
+        #         "t2_year": [2022, 2022, 2022],
+        #         # third point is on raster edge
+        #         "latitude": [2.4, 5.1, 5.7],
+        #         "longitude": [2.4, 1.1, 4.5],
+        #     }
+        # )
         df = pd.DataFrame(
             {
-                "t1_year": [2019, 2019, 2019],
-                "t2_year": [2022, 2022, 2022],
-                # third point is on raster edge
-                "latitude": [2.4, 5.1, 5.7],
-                "longitude": [2.4, 1.1, 4.5],
+                "t1_year": np.zeros(3),  # unused
+                "t2_year": np.zeros(3),  # unused
+                "p1_disturb_date": [2020, 2021, 0],
+                "p2_disturb_date": [0, 0, 2020],
+                "p3_disturb_date": [2022, 0, 0],
+                "p4_disturb_date": [0, 2020, 2022],
+                # p_i in y,x format:
+                # 1: [2,2], [2,1], [1,2], [1,1]
+                # 2: [3,3], [3,2], [2,3], [2,2]
+                # 3: [2,1], [2,2], [1,1], [1,2]
+                "latitude": [2.4, 3.1, 2.1],
+                "longitude": [2.4, 3.1, 1.5],
             }
         )
 
