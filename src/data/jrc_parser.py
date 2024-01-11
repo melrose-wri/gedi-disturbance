@@ -12,7 +12,7 @@ from src import constants
 from src.processing import jrc_overlays
 from src.utils import raster_utils
 
-PRODUCT_DIR = constants.JRC_PATH / "AnnualChange" / "tifs"
+PRODUCT_DIR = constants.JRC_PATH / "AnnualChange" / "tifs"  #TODO
 
 
 def get_sharding_geoms() -> gpd.GeoDataFrame:
@@ -76,7 +76,7 @@ def datetime_to_year_udf(d):
     return d.date().year
 
 
-def convert_shot_dates(shots_df):
+def convert_shot_dates(shots_df):   #TODO: Add more years, may need entire date (not just year)
     shots_df = shots_df.withColumn(
         "t1_year",
         datetime_to_year_udf(col("t1_absolute_time")),

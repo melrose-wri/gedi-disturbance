@@ -29,14 +29,14 @@ def get_spark():
         # The PostGIS DriverWrapper requires a postgres driver be available
         .config(
             "spark.driver.extraClassPath",
-            "/home/ah2174/.ivy2/jars/org.postgresql_postgresql-42.5.4.jar",
+            "/home/melrose94/.ivy2/jars/org.postgresql_postgresql-42.5.4.jar", #TODO
         )
         .config(
             "spark.driver.extraClassPath",
-            "/home/ah2174/.ivy2/jars/net.postgis_postgis-geometry-2021.1.0.jar",
+            "/home/melrose94/.ivy2/jars/net.postgis_postgis-geometry-2021.1.0.jar", #TODO
         )
         .config("spark.eventLog.enabled", True)
-        .config("spark.eventLog.dir", "/maps/spark/logs")
+        .config("spark.eventLog.dir", "/home/melrose94/projects/gedi/spark/logs") #TODO
         # Shapefile WKT strings can get very long -- show more debugging info
         .config("spark.sql.debug.maxToStringFields", 10000)
         # # Usually, if using this much memory on results and serialization,
