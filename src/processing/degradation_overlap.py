@@ -17,9 +17,13 @@ def to_pandas_points_query(points_column):
 
 def get_shots_df(spark, shots_dir):
     shots_df = spark.read.parquet(shots_dir.as_posix())
+    #TODO: Check if Europe data is t1_geometry or t1_geom
     shots_df.createOrReplaceTempView("gedi_shots")
+    # shots_df = spark.sql(
+    #     "SELECT *, ST_GeomFromWKB(t1_geometry) AS t1_geom, ST_GeomFromWKB(t2_geometry) AS t2_geom FROM gedi_shots"
+    # )
     shots_df = spark.sql(
-        "SELECT *, ST_GeomFromWKB(t1_geometry) AS t1_geom, ST_GeomFromWKB(t2_geometry) AS t2_geom FROM gedi_shots"
+        "SELECT *, ST_FlipCoordinates(ST_GeomFromWKB(t1_geometry)) AS t1_geom, ST_FlipCoordinates(ST_GeomFromWKB(t2_geometry)) AS t2_geom FROM gedi_shots"
     )
     shots_df = shots_df.drop("t1_geometry", "t2_geometry")
     shots_df.createOrReplaceTempView("gedi_shots")

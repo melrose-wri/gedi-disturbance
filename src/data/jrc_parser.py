@@ -12,7 +12,7 @@ from src import constants
 from src.processing import jrc_overlays
 from src.utils import raster_utils
 
-PRODUCT_DIR = constants.JRC_PATH / "AnnualChange" / "tifs"  #TODO
+PRODUCT_DIR = constants.DISTURBANCE_YEAR_PATH  #TODO
 
 
 def get_sharding_geoms() -> gpd.GeoDataFrame:
@@ -26,8 +26,9 @@ def get_sharding_geoms() -> gpd.GeoDataFrame:
         as a shard token. This can be used to reconstruct a file name
         for the desired year.
     """
-    files = list(PRODUCT_DIR.glob("*2021_SAM*.tif"))
-    tokens = [re.search(r"SAM_(.*)\.tif", f.name).groups()[0] for f in files]
+    pattern = "disturbanceYear"
+    files = list(PRODUCT_DIR.glob(f"*{pattern}*.tif"))  # TODO
+    tokens = [re.search(fr"(.*)_{pattern}.tif", f.name).groups()[0] for f in files]  # TODO
     gdf = gpd.GeoDataFrame(
         {
             "shard_token": tokens,
@@ -66,6 +67,17 @@ out_schema = T.StructType(
     ]
 )
 
+# out_schema = T.StructType(
+#     [
+#         T.StructField("t1_shot_number", T.LongType()),
+#         T.StructField("t2_shot_number", T.LongType()),
+#         T.StructField("longitude", T.DoubleType()),
+#         T.StructField("latitude", T.DoubleType()),
+#         T.StructField("t1_year", T.IntegerType()),
+#         T.StructField("t2_year", T.IntegerType()),
+#         T.StructField("shard_token", T.StringType()),
+#     ]
+# )
 
 @udf(returnType=T.IntegerType())
 def datetime_to_year_udf(d):
@@ -95,7 +107,7 @@ def _get_files(tokens) -> List[Path]:
     years = [2019, 2020, 2021, 2022]
 
     return [
-        PRODUCT_DIR / f"JRC_TMF_AnnualChange_v1_{year}_SAM_{tokens[0]}.tif"
+        constants.DRIVERS_PATH / f'{year}' / f"{tokens[0]}_tree_cover_loss_driver_processed.tif"
         for year in years
     ]
 

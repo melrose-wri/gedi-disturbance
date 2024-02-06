@@ -43,8 +43,14 @@ def gedi_product_path(product):
 GEDI_L1B_PATH = gedi_product_path(GediProduct.L1B)
 GEDI_L2A_PATH = gedi_product_path(GediProduct.L2A)
 GEDI_L4A_PATH = gedi_product_path(GediProduct.L4A)
-JRC_PATH = DATA_PATH / "Loss"
-RADD_PATH = DATA_PATH / "Loss"
+RASTER_PATH = DATA_PATH / "rasters"
+SHAPEFILE_PATH = DATA_PATH / "shapefiles"
+DISTURBANCE_YEAR_PATH = RASTER_PATH / "disturbanceYear"
+DISTURBANCE_HEIGHT_PATH = RASTER_PATH / "disturbanceHeight"
+DRIVERS_PATH = RASTER_PATH / "drivers"
+#FOREST_TYPE_PATH = RASTER_PATH / "forestType"
+ECOZONE_PATH = SHAPEFILE_PATH / "ecozone"
+GADM_PATH = SHAPEFILE_PATH / "country"
 
 # ---------------- API KEYS -------------------------
 

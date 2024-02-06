@@ -57,7 +57,7 @@ def get_idxs_two_nearest(array, values):
     as an out-of-bounds index.
 
     Args:
-        array (n,): array of of raster coordinate values
+        array (n,): array of raster coordinate values
                     e.g. from raster.x.data
         values (k,): coordinate values to find in the raster
     Returns:
