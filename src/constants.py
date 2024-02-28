@@ -30,24 +30,30 @@ LOG_PATH = PROJECT_PATH / "logs"
 LOG_PATH.mkdir(parents=True, exist_ok=True)
 
 #  Data related paths
-DATA_PATH = Path(os.getenv("DATA_PATH"))
-RESULTS_PATH = Path(os.getenv("RESULTS_PATH"))
-USER_PATH = Path(os.getenv("USER_PATH"))
-GEDI_PATH = DATA_PATH / "GEDI"
+DATA_PATH = 's3://gfw2-data/climate/European_height_carbon_model/gedi_coincident_shot/data/'
+RASTER_PATH = DATA_PATH / "raster"
+VECTOR_PATH = DATA_PATH / "vector"
+ECOZONE_PATH = VECTOR_PATH / "ecozone"
+GADM_PATH = VECTOR_PATH / "country"
+RESULTS_PATH = 's3://data/climate/European_height_carbon_model/gedi_coincident_shot/results'
 
 
-def gedi_product_path(product):
-    return GEDI_PATH / product.value
 
 
-GEDI_L1B_PATH = gedi_product_path(GediProduct.L1B)
-GEDI_L2A_PATH = gedi_product_path(GediProduct.L2A)
-GEDI_L4A_PATH = gedi_product_path(GediProduct.L4A)
-RASTER_PATH = DATA_PATH / "rasters"
-SHAPEFILE_PATH = DATA_PATH / "shapefiles"
-DISTURBANCE_YEAR_PATH = RASTER_PATH / "disturbanceYear"
-DISTURBANCE_HEIGHT_PATH = RASTER_PATH / "disturbanceHeight"
-DRIVERS_PATH = RASTER_PATH / "drivers"
+
+#RESULTS_PATH = Path(os.getenv("RESULTS_PATH"))
+#USER_PATH = Path(os.getenv("USER_PATH"))
+#GEDI_PATH = DATA_PATH / "GEDI"
+#def gedi_product_path(product):
+#    return GEDI_PATH / product.value
+#GEDI_L1B_PATH = gedi_product_path(GediProduct.L1B)
+#GEDI_L2A_PATH = gedi_product_path(GediProduct.L2A)
+#GEDI_L4A_PATH = gedi_product_path(GediProduct.L4A)
+#RASTER_PATH = DATA_PATH / "rasters"
+#SHAPEFILE_PATH = DATA_PATH / "shapefiles"
+#DISTURBANCE_YEAR_PATH = RASTER_PATH / "disturbanceYear"
+#DISTURBANCE_HEIGHT_PATH = RASTER_PATH / "disturbanceHeight"
+#DRIVERS_PATH = RASTER_PATH / "drivers"
 #FOREST_TYPE_PATH = RASTER_PATH / "forestType"
 ECOZONE_PATH = SHAPEFILE_PATH / "ecozone"
 GADM_PATH = SHAPEFILE_PATH / "country"
